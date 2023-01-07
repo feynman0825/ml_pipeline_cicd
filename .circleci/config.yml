@@ -17,6 +17,8 @@ prepare_tox: &prepare_tox
   run:
     name: Install tox
     command: |
+      python3 -m venv venv
+      source venv/bin/activate
       sudo pip install --upgrade pip
       pip install virtualenv -U
       pip install --user tox
