@@ -19,9 +19,12 @@ prepare_tox: &prepare_tox
     command: |
       python3 -m venv venv
       source venv/bin/activate
-      sudo pip install --upgrade pip
-      pip install virtualenv -U
-      pip install --user tox
+      python3 -m pip install --upgrade pip
+      python3 -m pip install --upgrade virtualenv
+      python3 -m pip install --upgrade tox
+      # sudo pip install --upgrade pip
+      # pip install virtualenv -U
+      # pip install --user tox
 
 
 jobs:
