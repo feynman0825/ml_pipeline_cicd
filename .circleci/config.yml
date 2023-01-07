@@ -135,7 +135,7 @@ jobs:
           name: Install requirements
           command: |
             . venv/bin/activate
-            pip install -r src/ml_pipeline_regression_model/requirements.txt
+            pip install -r src/ml_pipeline_regression_model/requirements/requirements.txt
       - run: 
           name: Train model
           command: |
@@ -145,8 +145,8 @@ jobs:
           name: Publish model to Gemfury
           command: |
             . venv/bin/activate
-            chmod +x ./scripts/publish_model.sh
-            ./scripts/publish_model.sh ./src/ml_pipeline_regression_model/
+            chmod +x ./publish_model.sh
+            ./publish_model.sh ./src/ml_pipeline_regression_model/
 
 
 
