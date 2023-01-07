@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 defaults: &defaults
   docker:
@@ -17,7 +17,6 @@ prepare_tox: &prepare_tox
   run:
     name: Install tox
     command: |
-      sudo apt install python3.9-venv
       sudo pip install --upgrade pip
       pip install --user tox
 
