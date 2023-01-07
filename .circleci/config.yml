@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: circleci/python:3.9.5
+    - image: circleci/python:3.9.0
   working_directory: ~/project
 
 prepare_venv: &prepare_venv
@@ -132,11 +132,10 @@ jobs:
     steps:
       - checkout:
           path: ~/project
+      - *prepare_tox
       - run: 
           name: Install requirements
           command: |
-            sudo pip install --upgrade pip
-            pip install --user tox
             tox -e publish_model
 
 
@@ -161,7 +160,6 @@ workflows:
       #           - master
       # - test_and_upload_model:
       #     <<: *tags_only
-      - test_regression_model_py37
       - test_regression_model_py38
       - train_and_upload_regression_model
       - deploy_app_container_in_heroku:
