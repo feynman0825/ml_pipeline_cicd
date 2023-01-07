@@ -60,7 +60,6 @@ jobs:
           command: |
             tox -e publish_model
 
-
   deploy_app_container_in_heroku:
     <<: *defaults
     steps:
@@ -112,32 +111,6 @@ jobs:
             pip install --user tox
             tox
 
-  test_regression_model_py38:
-    docker:
-      - image: circleci/python:3.8.0
-    working_directory: ~/project/src/ml_pipeline_regression_model
-    steps:
-      - checkout:
-          path: ~/project
-      - run:
-          name: Run tests with Python 3.8
-          command: |
-            sudo pip install --upgrade pip
-            pip install --user tox
-            tox
-
-  train_and_upload_regression_model:
-    <<: *defaults
-    working_directory: ~/project/src/ml_pipeline_regression_model
-    steps:
-      - checkout:
-          path: ~/project
-      - *prepare_tox
-      - run: 
-          name: Install requirements
-          command: |
-            tox -e publish_model
-
 
 tags_only: &tags_only
   filters:
@@ -151,18 +124,18 @@ workflows:
   integration_tests:
     jobs:
       - test_ml_pipeline_api
-      - deploy_app_to_heroku:
-          requires:
-            - test_ml_pipeline_api
-          filters:
-            branches:
-              only:
-                - master
-      - test_and_upload_model:
-          <<: *tags_only
-      - train_and_upload_regression_model
-      # - deploy_app_container_in_heroku:
+      # - deploy_app_to_heroku:
+      #     requires:
+      #       - test_ml_pipeline_api
       #     filters:
       #       branches:
       #         only:
       #           - master
+      - test_and_upload_model:
+          <<: *tags_only
+      - train_and_upload_regression_model
+      - deploy_app_container_in_heroku:
+          filters:
+            branches:
+              only:
+                - master
