@@ -123,6 +123,12 @@ workflows:
   version: 2
   integration_tests:
     jobs:
+      - test_and_upload_model:
+          filters:
+            branches:
+              only:
+                - master
+        # <<: *tags_only
       - test_ml_pipeline_api
       # - deploy_app_to_heroku:
       #     requires:
@@ -131,8 +137,6 @@ workflows:
       #       branches:
       #         only:
       #           - master
-      - test_and_upload_model:
-          <<: *tags_only
       - deploy_app_container_in_heroku:
           filters:
             branches:
