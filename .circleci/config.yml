@@ -130,6 +130,8 @@ workflows:
                 - master
         # <<: *tags_only
       - test_ml_pipeline_api
+          requires:
+            - test_and_upload_model
       # - deploy_app_to_heroku:
       #     requires:
       #       - test_ml_pipeline_api
@@ -138,6 +140,8 @@ workflows:
       #         only:
       #           - master
       - deploy_app_container_in_heroku:
+          requires:
+            - test_ml_pipeline_api
           filters:
             branches:
               only:
