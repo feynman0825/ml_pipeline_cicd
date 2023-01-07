@@ -131,23 +131,25 @@ jobs:
     working_directory: ~/project/src/ml_pipeline_regression_model
     steps:
       - checkout
+        path: ~/project
       - *prepare_venv
       - run: 
           name: Install requirements
           command: |
             . venv/bin/activate
-            pip install -r requirements/requirements.txt
-      - run: 
-          name: Train model
-          command: |
-            . venv/bin/activate
-            python3 regression_model/train_pipeline.py
-      - run: 
-          name: Publish model to Gemfury
-          command: |
-            . venv/bin/activate
-            chmod +x ./publish_model.sh
-            ./publish_model.sh .
+            tox -e publish_model
+
+      # - run: 
+      #     name: Train model
+      #     command: |
+      #       . venv/bin/activate
+      #       python3 regression_model/train_pipeline.py
+      # - run: 
+      #     name: Publish model to Gemfury
+      #     command: |
+      #       . venv/bin/activate
+      #       chmod +x ./publish_model.sh
+      #       ./publish_model.sh .
 
 
 
