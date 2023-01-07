@@ -150,7 +150,7 @@ workflows:
   version: 2
   integration_tests:
     jobs:
-      # - test_ml_pipeline_api
+      - test_ml_pipeline_api
       # - deploy_app_to_heroku:
       #     requires:
       #       - test_ml_pipeline_api
@@ -160,7 +160,7 @@ workflows:
       #           - master
       # - test_and_upload_model:
       #     <<: *tags_only
-      - test_regression_model_py38
+      # - test_regression_model_py38
       - train_and_upload_regression_model
       - deploy_app_container_in_heroku:
           filters:
