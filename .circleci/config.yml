@@ -132,25 +132,12 @@ jobs:
     steps:
       - checkout:
           path: ~/project
-      - *prepare_venv
       - run: 
           name: Install requirements
           command: |
-            source venv/bin/activate
+            sudo pip install --upgrade pip
+            pip install --user tox
             tox -e publish_model
-
-      # - run: 
-      #     name: Train model
-      #     command: |
-      #       . venv/bin/activate
-      #       python3 regression_model/train_pipeline.py
-      # - run: 
-      #     name: Publish model to Gemfury
-      #     command: |
-      #       . venv/bin/activate
-      #       chmod +x ./publish_model.sh
-      #       ./publish_model.sh .
-
 
 
 tags_only: &tags_only
@@ -174,6 +161,7 @@ workflows:
       #           - master
       # - test_and_upload_model:
       #     <<: *tags_only
+      - test_regression_model_py37
       - test_regression_model_py38
       - train_and_upload_regression_model
       - deploy_app_container_in_heroku:
