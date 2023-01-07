@@ -128,6 +128,7 @@ jobs:
 
   train_and_upload_regression_model:
     <<: *defaults
+    working_directory: ~/project/src/ml_pipeline_regression_model
     steps:
       - checkout
       - *prepare_venv
@@ -135,12 +136,12 @@ jobs:
           name: Install requirements
           command: |
             . venv/bin/activate
-            pip install -r src/ml_pipeline_regression_model/requirements/requirements.txt
+            pip install -r requirements/requirements.txt
       - run: 
           name: Train model
           command: |
             . venv/bin/activate
-            PYTHONPATH=./src/ml_pipeline_regression_model python3 src/ml_pipeline_regression_model/regression_model/train_pipeline.py
+            python3 regression_model/train_pipeline.py
       - run: 
           name: Publish model to Gemfury
           command: |
