@@ -146,7 +146,7 @@ jobs:
           command: |
             . venv/bin/activate
             chmod +x ./publish_model.sh
-            ./publish_model.sh ./src/ml_pipeline_regression_model/
+            ./publish_model.sh .
 
 
 
