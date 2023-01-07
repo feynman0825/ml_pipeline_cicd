@@ -133,7 +133,6 @@ workflows:
       #           - master
       - test_and_upload_model:
           <<: *tags_only
-      - train_and_upload_regression_model
       - deploy_app_container_in_heroku:
           filters:
             branches:
