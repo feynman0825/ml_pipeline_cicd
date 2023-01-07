@@ -8,7 +8,7 @@ WORKDIR /opt/ml_pipeline_api
 ARG PIP_EXTRA_INDEX_URL
 
 # Install requirements, including from Gemfury
-ADD ./ml_pipeline_api /opt/ml_pipeline_api/
+ADD ./src/ml_pipeline_api /opt/ml_pipeline_api/
 RUN pip install --upgrade pip
 RUN pip install -r /opt/ml_pipeline_api/requirements.txt
 
